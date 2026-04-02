@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Login");
@@ -13,6 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -130,22 +132,35 @@ const Login = () => {
                   Password
                 </label>
                 {currentState === "Login" && (
-                    <Link to="/forgot-password" className="text-[11px] uppercase tracking-[0.2em] text-gray-500 hover:text-black transition">
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 cursor-pointer hover:text-black transition">
-                    Forgot Password?
-                  </p>
-                </Link>
+                  <Link
+                    to="/forgot-password"
+                    className="text-[11px] uppercase tracking-[0.2em] text-gray-500 hover:text-black transition"
+                  >
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 cursor-pointer hover:text-black transition">
+                      Forgot Password?
+                    </p>
+                  </Link>
                 )}
               </div>
 
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                placeholder="••••••••"
-                required
-                className="w-full px-0 py-3 text-sm bg-transparent border-t-0 border-b border-gray-300 outline-none border-x-0 focus:border-black"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  placeholder="••••••••"
+                  required
+                  className="w-full px-0 py-3 pr-10 text-sm bg-transparent border-t-0 border-b border-gray-300 outline-none border-x-0 focus:border-black"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 text-gray-500 -translate-y-1/2 top-1/2 hover:text-black"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             {currentState === "Login" && (
@@ -170,8 +185,8 @@ const Login = () => {
                   ? "Signing In..."
                   : "Creating Account..."
                 : currentState === "Login"
-                ? "Sign In"
-                : "Sign Up"}
+                  ? "Sign In"
+                  : "Sign Up"}
             </button>
           </form>
 

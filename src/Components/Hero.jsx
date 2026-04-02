@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import { assets } from "../assets/assets";
 
 const Hero = () => {
@@ -34,10 +35,13 @@ const Hero = () => {
             <button className="bg-white px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black transition hover:bg-gray-200">
               Shop Now
             </button>
-
+        <Link to="/collection" >
             <button className="border border-white px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-black">
               Explore Collection
             </button>
+        
+        </Link>
+            
           </div>
         </div>
       </div>
